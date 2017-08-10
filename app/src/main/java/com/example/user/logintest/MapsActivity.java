@@ -38,6 +38,8 @@ import java.io.IOException;
 import java.io.InvalidObjectException;
 import java.util.ArrayList;
 import java.util.List;
+import java.lang.*;
+
 
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,
@@ -209,9 +211,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             EditText tf_location = (EditText) findViewById(R.id.TF_location);
             String location = tf_location.getText().toString();
             for (int i = 0; i < locationArrayList.size(); i++) {
-                if (location == locationArrayList.get(i).name) {
-                    LatLng newlating = new LatLng(locationArrayList.get(i).lat, locationArrayList.get(i).lng);
-                    mMap.animateCamera(CameraUpdateFactory.newLatLng(newlating));
+                if (location.equals( locationArrayList.get(i).name.replaceAll("[a-zA-Z]+",""))) {
+                    LatLng s_research = new LatLng(locationArrayList.get(i).lat, locationArrayList.get(i).lng);
+                    mMap.moveCamera(CameraUpdateFactory.newLatLng(s_research));
+                    mMap.animateCamera(CameraUpdateFactory.zoomBy(10));
+
                 }
             }
         }
