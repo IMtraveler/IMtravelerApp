@@ -205,7 +205,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
     public void onClick(View v)
     {
-        if(v.getId() == R.id.B_search)
+        if(v.getId()==R.id.B_search) {
+            EditText tf_location = (EditText) findViewById(R.id.TF_location);
+            String location = tf_location.getText().toString();
+            for (int i = 0; i < locationArrayList.size(); i++) {
+                if (location == locationArrayList.get(i).name) {
+                    LatLng newlating = new LatLng(locationArrayList.get(i).lat, locationArrayList.get(i).lng);
+                    mMap.animateCamera(CameraUpdateFactory.newLatLng(newlating));
+                }
+            }
+        }
+
+      /*  if(v.getId() == R.id.B_search)
         {
             EditText tf_location = (EditText)findViewById(R.id.TF_location);
             String location = tf_location.getText().toString();
@@ -229,7 +240,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
                 }
             }
-        }
+        }*/
     }
 
 
